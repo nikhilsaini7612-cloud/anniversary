@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Anniversary, My Love</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Poppins:wght@300;400;500&display=swap');
+
+  :root {
+    --blush: #f7d9dd;
+    --rose: #e8a5ad;
+    --deep-rose: #c97d8a;
+    --cream: #fff8f5;
+    --plum: #5c3a4a;
+    --gold: #d9a86c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(160deg, var(--cream) 0%, var(--blush) 100%);
+    color: var(--plum);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Floating hearts background */
+  .hearts-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -50px;
+    opacity: 0.35;
+    animation: floatUp linear infinite;
+    color: var(--rose);
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.35; }
+    90% { opacity: 0.35; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    text-align: center;
+    padding: 40px 0 60px;
+  }
+
+  .eyebrow {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.2s;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 8vw, 4.2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--plum);
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.5s;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--deep-rose);
+  }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--plum);
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 0.9s;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(14px); }
+  }
+
+  /* ---- Counter ---- */
+  .counter-card {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(232,165,173,0.4);
+    border-radius: 24px;
+    padding: 36px 24px;
+    margin: 50px 0;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(201,125,138,0.12);
+  }
+
+  .counter-label {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 14px;
+  }
+
+  .counter-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 7vw, 3.2rem);
+    font-weight: 600;
+    color: var(--plum);
+  }
+
+  .counter-days {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--deep-rose);
+    margin-top: 4px;
+  }
+
+  /* ---- Section divider ---- */
+  .divider {
+    text-align: center;
+    margin: 60px 0 30px;
+    color: var(--rose);
+    font-size: 1.4rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: var(--plum);
+  }
+
+  /* ---- Timeline ---- */
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+    border-left: 2px solid var(--rose);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-item::before {
+    content: '♥';
+    position: absolute;
+    left: -39px;
+    top: 0;
+    background: var(--cream);
+    color: var(--deep-rose);
+    width: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .timeline-date {
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--deep-rose);
+    margin-bottom: 6px;
+  }
+
+  .timeline-text {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ---- Photo gallery ---- */
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--rose), var(--blush));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(201,125,138,0.15);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+
+  /* ---- Reasons list ---- */
+  .reasons {
+    background: rgba(255,255,255,0.55);
+    border-radius: 24px;
+    padding: 40px 30px;
+    margin: 50px 0;
+  }
+
+  .reason {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .reason:last-child { margin-bottom: 0; }
+
+  .reason-icon {
+    color: var(--deep-rose);
+    flex-shrink: 0;
+  }
+
+  /* ---- Letter ---- */
+  .letter {
+    background: var(--cream);
+    border: 1px solid rgba(232,165,173,0.5);
+    border-radius: 24px;
+    padding: 40px 32px;
+    margin: 50px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    line-height: 1.75;
+    color: var(--plum);
+    position: relative;
+  }
+
+  .letter::before {
+    content: '"';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    font-size: 4rem;
+    color: var(--rose);
+    font-family: serif;
+  }
+
+  .letter-sign {
+    text-align: right;
+    margin-top: 24px;
+    font-style: italic;
+    color: var(--deep-rose);
+  }
+
+  /* ---- Button / surprise ---- */
+  .cta-wrap {
+    text-align: center;
+    margin: 60px 0 20px;
+  }
+
+  .cta-btn {
+    background: var(--deep-rose);
+    color: white;
+    border: none;
+    padding: 16px 38px;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(201,125,138,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(201,125,138,0.45);
+  }
+
+  .cta-btn:active { transform: translateY(0) scale(0.98); }
+
+  .surprise-msg {
+    margin-top: 26px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--deep-rose);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.6s ease;
+  }
+
+  .surprise-msg.show {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 26px;
+  }
+
+  /* ---- Question modal ---- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(92, 58, 74, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 20px;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-card {
+    background: var(--cream);
+    border-radius: 28px;
+    padding: 48px 32px;
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(92,58,74,0.3);
+    transform: scale(0.9);
+    transition: transform 0.35s ease;
+  }
+
+  .modal-overlay.show .modal-card {
+    transform: scale(1);
+  }
+
+  .modal-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--plum);
+    margin-bottom: 36px;
+  }
+
+  .modal-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 60px;
+  }
+
+  .btn-yes {
+    background: var(--deep-rose);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease, font-size 0.3s ease;
+    box-shadow: 0 8px 20px rgba(201,125,138,0.35);
+  }
+
+  .btn-no {
+    background: transparent;
+    color: var(--deep-rose);
+    border: 1.5px solid var(--rose);
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    position: relative;
+  }
+
+  .btn-no.dodging {
+    position: absolute;
+  }
+
+  /* ---- Final reveal page ---- */
+  .reveal-page {
+    position: fixed;
+    inset: 0;
+    background: var(--plum);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .reveal-page.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .reveal-page img {
+    max-width: 100%;
+    max-height: 78vh;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    object-fit: cover;
+  }
+
+  .reveal-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--blush);
+    margin-top: 24px;
+  }
+
+  .reveal-close {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    background: none;
+    border: none;
+    color: var(--blush);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+  }
+
+  .reveal-close:hover { opacity: 1; }
+
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 0.8rem;
+    color: var(--deep-rose);
+    opacity: 0.7;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .heart { animation: none; display: none; }
+    * { transition: none !important; animation-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Happy Anniversary</div>
+    <h1>To my favorite <em>person</em>,<br>every single day</h1>
+    <p class="hero-sub">A little something I made just for you 💕</p>
+  </section>
+
+  <!-- COUNTER -->
+  <div class="counter-card">
+    <div class="counter-label">We've been together for</div>
+    <div class="counter-number" id="counterNumber">—</div>
+    <div class="counter-days" id="counterDays"></div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="divider">✦ ✦ ✦</div>
+  <h2 class="section-title">Our Story So Far</h2>
+  <div class="timeline" id="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">The Beginning</div>
+      <div class="timeline-text">You trusted me and accepted my proposal after all these years.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">The First Date</div>
+      <div class="timeline-text">I messed up everything, but we laughed when i spoilled cold drink on me.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">A Favorite Memory</div>
+      <div class="timeline-text">When you came to My Birthday for the first time.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Today</div>
+      <div class="timeline-text">Still choosing each other, no matter what happens.</div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="divider">✦ ✦ ✦</div>
+  <h2 class="section-title">Moments We've Made</h2>
+  <div class="gallery">
+    <div class="gallery-item"><img src="photo1.jpg" alt="Us together"></div>
+    <div class="gallery-item"><img src="photo2.jpg" alt="Us together"></div>
+    <div class="gallery-item"><img src="photo3.jpg" alt="Us together"></div>
+    <div class="gallery-item"><img src="photo4.jpg" alt="Us together"></div>
+  </div>
+
+  <!-- REASONS -->
+  <div class="reasons">
+    <h2 class="section-title" style="margin-bottom:28px;">Reasons I Love You</h2>
+    <div class="reason"><span class="reason-icon">♥</span><span>YOu make every single day brighter just by being in my life.</span></div>
+    <div class="reason"><span class="reason-icon">♥</span><span>I can completely be myself around you without any hesitation.</span></div>
+    <div class="reason"><span class="reason-icon">♥</span><span>Your warmth and kindness constantly inspire me to be a better person.</span></div>
+    <div class="reason"><span class="reason-icon">♥</span><span>Your hugs fix almost everything.</span></div>
+    <div class="reason"><span class="reason-icon">♥</span><span>YOu make even the simples moments feel unforgettable and speacial.</span></div>
+  </div>
+
+  <!-- LETTER -->
+  <div class="divider">✦ ✦ ✦</div>
+  <div class="letter">
+    My love,
+
+I don't think I've ever told you this the way I actually mean it, so let me try now. You didn't just walk into my life — you rearranged it, quietly and completely, until I couldn't picture it without you in it.
+
+I love the way you say my name when you're annoyed with me and the way you say it when you're not. I love that you remember things I mention once in passing, weeks later, like they mattered to you as much as they mattered to me. I love that you make ordinary days — grocery runs, lazy Sundays, nothing-special evenings — feel like they're worth remembering.
+
+There's a version of me that existed before you, and I barely recognize him now. You've made me softer in the ways that matter and steadier in the ways I needed. When things go wrong, you're the first person I want to tell. When things go right, they don't feel real until I've told you.
+
+I know we've had our hard days too — the ones where we didn't get it right, where patience ran thin. But even on those days, I never once doubted that I wanted to keep choosing you. That's the part that surprises me most, honestly — how easy the choosing has become.
+
+So today, on our anniversary, I just want you to know: I'm not here out of habit or comfort. I'm here because every version of my future I imagine has you in it, front and center, no question. Thank you for loving me the way you do — patiently, fiercely, and completely yourself the whole time.
+
+Here's to every ordinary day still ahead of us, because with you, none of them feel ordinary at all.
+
+I love you. Today, and every day after this one.
+    <div class="letter-sign">— Yours, Ravi Saini</div>
+  </div>
+
+  <!-- SURPRISE BUTTON -->
+  <div class="cta-wrap">
+    <button class="cta-btn" onclick="openQuestionModal()">Tap for a surprise 🎁</button>
+  </div>
+
+  <footer>made with ♥ for the best anniversary yet</footer>
+
+</div>
+
+<!-- QUESTION MODAL -->
+<div class="modal-overlay" id="questionModal">
+  <div class="modal-card">
+    <div class="modal-question">Do you love me?</div>
+    <div class="modal-buttons" id="modalButtons">
+      <button class="btn-yes" id="btnYes" onclick="openReveal()">Yes</button>
+      <button class="btn-no" id="btnNo" onclick="dodgeNo()">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL REVEAL PAGE -->
+<div class="reveal-page" id="revealPage">
+  <button class="reveal-close" onclick="closeReveal()" aria-label="Close">×</button>
+  <!-- ⚠️ EDIT: replace the src below with your own image -->
+  <img src="photo5.png" alt="A moment we love" id="revealImg" />
+  <div class="reveal-caption">I knew it. I love you too. ♥</div>
+</div>
+
+<script>
+  // ---- Floating hearts ----
+  const heartsBg = document.getElementById('heartsBg');
+  const heartSymbols = ['♥','♡'];
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = heartSymbols[Math.floor(Math.random()*heartSymbols.length)];
+    h.style.left = Math.random()*100 + '%';
+    h.style.fontSize = (14 + Math.random()*20) + 'px';
+    h.style.animationDuration = (10 + Math.random()*14) + 's';
+    h.style.animationDelay = (Math.random()*14) + 's';
+    heartsBg.appendChild(h);
+  }
+
+  // ---- Anniversary counter ----
+  // ⚠️ EDIT THIS: set the date you got together (YYYY, MM (0-indexed!), DD)
+  const startDate = new Date(2025, 05, 29); // example: June 14, 2022
+
+  function updateCounter() {
+    const now = new Date();
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+
+    if (days < 0) {
+      months -= 1;
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    const totalDays = Math.floor((now - startDate) / (1000*60*60*24));
+
+    document.getElementById('counterNumber').textContent =
+      `${years}y ${months}m ${days}d`;
+    document.getElementById('counterDays').textContent =
+      `(${totalDays.toLocaleString()} days together)`;
+  }
+  updateCounter();
+
+  // ---- Timeline scroll reveal ----
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+  items.forEach(item => observer.observe(item));
+
+  // ---- Question modal ----
+  const questionModal = document.getElementById('questionModal');
+  const revealPage = document.getElementById('revealPage');
+  const btnYes = document.getElementById('btnYes');
+  const btnNo = document.getElementById('btnNo');
+  const modalButtons = document.getElementById('modalButtons');
+
+  let yesScale = 1;
+  const yesFontBase = 16; // px, matches ~1rem
+
+  function openQuestionModal() {
+    // reset state each time it's opened
+    yesScale = 1;
+    btnYes.style.fontSize = yesFontBase + 'px';
+    btnYes.style.padding = '14px 32px';
+    btnNo.classList.remove('dodging');
+    btnNo.style.position = '';
+    btnNo.style.left = '';
+    btnNo.style.top = '';
+    btnNo.style.opacity = '1';
+    questionModal.classList.add('show');
+  }
+
+  function closeQuestionModal() {
+    questionModal.classList.remove('show');
+  }
+
+  // Every tap on "No": Yes grows bigger, and No dodges to a new spot so it's
+  // harder to press (never fully disappears, just moves around playfully).
+  function dodgeNo() {
+    yesScale += 0.25;
+    btnYes.style.fontSize = (yesFontBase * yesScale) + 'px';
+    btnYes.style.padding = (14 + yesScale * 4) + 'px ' + (32 + yesScale * 10) + 'px';
+
+    const cardRect = modalButtons.getBoundingClientRect();
+    const maxX = Math.max(cardRect.width - 90, 40);
+    const maxY = 90;
+    const randX = Math.random() * maxX - maxX / 2;
+    const randY = Math.random() * maxY - maxY / 2;
+
+    btnNo.classList.add('dodging');
+    btnNo.style.left = `calc(50% + ${randX}px)`;
+    btnNo.style.top = `calc(50% + ${randY}px)`;
+  }
+
+  function openReveal() {
+    closeQuestionModal();
+    revealPage.classList.add('show');
+  }
+
+  function closeReveal() {
+    revealPage.classList.remove('show');
+  }
+
+  // Optional: click outside the card to close the question modal
+  questionModal.addEventListener('click', (e) => {
+    if (e.target === questionModal) closeQuestionModal();
+  });
+</script>
+
+</body>
+</html>
